@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WASM Test</title>
+</head>
+<body>
+    <h1>Browser Capabilities Test</h1>
+    <div id="results"></div>
+    <script>
+        const results = document.getElementById('results');
+        
+        // Check SharedArrayBuffer
+        const hasSharedArrayBuffer = typeof SharedArrayBuffer !== 'undefined';
+        results.innerHTML += `<p>SharedArrayBuffer: ${hasSharedArrayBuffer ? '✅ Available' : '❌ Not available'}</p>`;
+        
+        // Check crossOriginIsolated
+        const isCrossOriginIsolated = self.crossOriginIsolated;
+        results.innerHTML += `<p>crossOriginIsolated: ${isCrossOriginIsolated ? '✅ Yes' : '❌ No'}</p>`;
+        
+        // Check WebAssembly
+        const hasWasm = typeof WebAssembly !== 'undefined';
+        results.innerHTML += `<p>WebAssembly: ${hasWasm ? '✅ Available' : '❌ Not available'}</p>`;
+        
+        // Try loading Pyodide
+        results.innerHTML += '<p>Testing Pyodide load...</p>';
+        
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
+        script.onload = async () => {
+            try {
+                const pyodide = await loadPyodide({
+                    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
+                });
+                results.innerHTML += '<p>Pyodide: ✅ Loaded successfully!</p>';
+            } catch (error) {
+                results.innerHTML += `<p>Pyodide: ❌ Failed - ${error.message}</p>`;
+                console.error('Pyodide error:', error);
+            }
+        };
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>

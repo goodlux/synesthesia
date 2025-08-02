@@ -1,0 +1,442 @@
+/* Synesthesia - GLiNER Mood Chat Styles */
+
+:root {
+    /* Cool Spectrum Colors */
+    --color-sad: #4A90E2;
+    --color-melancholy: #5C7CFA;
+    --color-peaceful: #48C9B0;
+    --color-calm: #52C41A;
+    --color-thoughtful: #13C2C2;
+    
+    /* Warm Spectrum Colors */
+    --color-angry: #F5222D;
+    --color-passionate: #FA541C;
+    --color-excited: #FA8C16;
+    --color-frustrated: #FF7A45;
+    --color-enthusiastic: #FFA940;
+    
+    /* Neutral Colors */
+    --color-happy: #FADB14;
+    --color-content: #A0D911;
+    --color-hopeful: #52C41A;
+    
+    /* UI Colors */
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --bg-panel: #141414;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --border-color: #2a2a2a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.app-header {
+    background: var(--bg-secondary);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-header h1 {
+    font-size: 1.5rem;
+    background: linear-gradient(90deg, var(--color-calm) 0%, var(--color-excited) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.mood-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mood-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.mood-value {
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    background: var(--bg-panel);
+    transition: all 0.3s ease;
+}
+
+/* Main Layout */
+.chat-layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1px;
+    background: var(--border-color);
+    overflow: hidden;
+}
+
+/* Emotion Panels */
+.emotion-panel {
+    background: var(--bg-panel);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.emotion-panel h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.cool-panel h2 {
+    color: var(--color-calm);
+}
+
+.warm-panel h2 {
+    color: var(--color-excited);
+}
+
+.emotion-info {
+    margin-bottom: 1rem;
+}
+
+.emotion-desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.messages-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem 0;
+}
+
+.emotion-word {
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+    border-left: 3px solid;
+    font-size: 0.9rem;
+    animation: fadeIn 0.3s ease;
+}
+
+.word-text {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.word-label {
+    font-size: 0.7rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Chat Panel */
+.chat-panel {
+    background: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    min-height: 0;
+}
+
+.welcome-message {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 3rem;
+}
+
+.welcome-message p {
+    margin-bottom: 1rem;
+}
+
+.hint {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Chat Messages */
+.message {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: var(--bg-secondary);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.message-sender {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.message-time {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.message-content {
+    line-height: 1.6;
+}
+
+/* Emotional Highlighting */
+.emotion-highlight {
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.emotion-highlight:hover {
+    filter: brightness(1.2);
+    transform: scale(1.05);
+}
+
+.emotion-highlight::after {
+    content: attr(data-emotion);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.emotion-highlight:hover::after {
+    opacity: 1;
+}
+
+/* Chat Input */
+.chat-input-container {
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+.input-wrapper {
+    background: var(--bg-panel);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.chat-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    resize: none;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.chat-input:focus {
+    outline: none;
+}
+
+.input-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.word-count {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.send-btn {
+    background: linear-gradient(90deg, var(--color-calm) 0%, var(--color-excited) 100%);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+.send-btn:hover {
+    transform: scale(1.05);
+}
+
+.send-btn:active {
+    transform: scale(0.95);
+}
+
+/* Processing Indicator */
+.processing-indicator {
+    margin-top: 0.5rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.processing-indicator.active {
+    opacity: 1;
+}
+
+.processing-text {
+    font-size: 0.9rem;
+    color: var(--color-thoughtful);
+}
+
+/* Entity Sidebar */
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    max-width: 400px;
+    width: 90%;
+}
+
+.modal-content h2 {
+    margin-bottom: 1rem;
+}
+
+.modal-content p {
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(90deg, var(--color-calm) 0%, var(--color-excited) 100%);
+    border: none;
+    border-radius: 0.25rem;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-panel);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3a3a3a;
+}
+
+/* Emotion Panel Messages */
+.emotion-message {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: var(--bg-secondary);
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.cool-panel .emotion-message {
+    border-left-color: var(--color-calm);
+}
+
+.warm-panel .emotion-message {
+    border-left-color: var(--color-excited);
+}
+
+.emotion-message:hover {
+    transform: translateX(5px);
+}

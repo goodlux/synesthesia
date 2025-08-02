@@ -1,0 +1,6 @@
+{
+  "packages": [
+    "numpy"
+  ],
+  "init_code": "\nimport sys\nsys.path.append('/synesthesia')\nfrom synesthesia.mood_analyzer import create_analyzer, analyze_text\n\n# Create global analyzer instance\nanalyzer = create_analyzer()\n\n# Export functions to JavaScript\ndef process_text(text):\n    return analyze_text(analyzer, text)\n"
+}

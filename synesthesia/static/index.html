@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synesthesia - GLiNER Mood Chat</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Synesthesia</h1>
+            <div class="mood-indicator">
+                <span class="mood-label">Current Mood:</span>
+                <span class="mood-value" id="current-mood">Neutral</span>
+            </div>
+        </header>
+        
+        <main class="chat-layout">
+            <!-- User Emotions Panel (Left) -->
+            <aside class="emotion-panel cool-panel" id="cool-panel">
+                <h2>Your Emotions</h2>
+                <div class="emotion-info">
+                    <span class="emotion-desc">Emotional words detected in your messages</span>
+                </div>
+                <div class="messages-container" id="cool-messages">
+                    <!-- User emotional words will appear here -->
+                </div>
+            </aside>
+            
+            <!-- Main Chat Panel (Center) -->
+            <section class="chat-panel" id="main-chat">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="welcome-message">
+                        <p>Welcome to Synesthesia! Start chatting to see emotional analysis in real-time.</p>
+                        <p class="hint">Messages will be highlighted and positioned based on their emotional content.</p>
+                    </div>
+                </div>
+                
+                <div class="chat-input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="chat-input" 
+                            class="chat-input" 
+                            placeholder="Type your message... (emotional content will be analyzed)"
+                            rows="3"
+                        ></textarea>
+                        <div class="input-actions">
+                            <span class="word-count" id="word-count">0 words</span>
+                            <button id="send-btn" class="send-btn">Send</button>
+                        </div>
+                    </div>
+                    <div class="processing-indicator" id="processing-indicator">
+                        <span class="processing-text">Analyzing emotions...</span>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Claude Emotions Panel (Right) -->
+            <aside class="emotion-panel warm-panel" id="warm-panel">
+                <h2>Claude's Emotions</h2>
+                <div class="emotion-info">
+                    <span class="emotion-desc">Emotional words detected in Claude's responses</span>
+                </div>
+                <div class="messages-container" id="warm-messages">
+                    <!-- Claude emotional words will appear here -->
+                </div>
+            </aside>
+        </main>
+        
+    </div>
+    
+    <!-- API Key Modal -->
+    <div class="modal" id="api-modal">
+        <div class="modal-content">
+            <h2>Claude API Key Required</h2>
+            <p>Enter your Claude API key to enable chat functionality:</p>
+            <input type="password" id="api-key-input" placeholder="sk-ant-...">
+            <button id="api-key-submit">Start Chatting</button>
+        </div>
+    </div>
+    
+    <script src="js/app.js"></script>
+</body>
+</html>
